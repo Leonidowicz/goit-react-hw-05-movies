@@ -10,16 +10,16 @@ export const getOneMovie = (id) => {
   return axios.get(`/movie/${id}?${KEY}`);
 };
 
-export const getByQuery = (query) => {
-  return axios.get(
-    `/search/movie?${KEY}&query=${query}&page=1&include_adult=false`
-  );
+export const getReview = (id) => {
+  return axios.get(`/movie/${id}/reviews?${KEY}&page=1`);
 };
 
 export const getCast = (id) => {
   return axios.get(`/movie/${id}/credits?${KEY}`);
 };
 
-export const getReview = (id) => {
-  return axios.get(`/movie/${id}/reviews?${KEY}&page=1`);
+export const getByQuery = (query) => {
+  return axios.get(
+    `/search/movie?${KEY}&query=${query}&page=1&include_adult=false`
+  );
 };

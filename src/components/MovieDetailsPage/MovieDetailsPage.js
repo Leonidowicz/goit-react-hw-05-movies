@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getOneMovie } from '../../services/AxiosMovies';
 import Loader from 'react-loader-spinner';
 import { Route } from 'react-router';
-import { Cast } from '../Cast/Cast';
+import { Cast } from '../Cast/Cast.jsx';
 import { Reviews } from '../Reviews/Reviews.jsx';
 
 export const MovieDetailsPage = () => {
@@ -96,6 +96,7 @@ export const MovieDetailsPage = () => {
           <Route path="/movies/:movieId/cast">
             <Cast />
           </Route>
+
           <Route path="/movies/:movieId/reviews">
             <Reviews />
           </Route>

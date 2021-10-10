@@ -10,7 +10,9 @@ export const Reviews = () => {
   useEffect(() => {
     getReview(movieId).then(data => {
       setReview(data.data.results);
-      setStatus(data.status)
+      setStatus(data.status);
+      window.scrollTo(0, 700);
+
     })
   }, [movieId]);
 
