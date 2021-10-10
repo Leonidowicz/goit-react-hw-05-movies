@@ -1,95 +1,26 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getOneMovie } from '../../services/AxiosMovies';
 import Loader from 'react-loader-spinner';
+import { Route } from 'react-router';
+import { Cast } from '../Cast/Cast';
+import { Reviews } from '../Reviews/Reviews.jsx';
 
 export const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
   const [status, setStatus] = useState(true);
 
   const { movieId } = useParams();
-
-  const ganre = (id) => {
-    let g = '';
-    switch (id) {
-      case 28:
-        g = 'Action';
-        break;
-      case 12:
-        g = 'Adventure';
-        break;
-      case 16:
-        g = 'Animation';
-        break;
-      case 35:
-        g = 'Comedy';
-        break;
-      case 80:
-        g = 'Crime';
-        break;
-      case 99:
-        g = 'Documentary';
-        break;
-      case 18:
-        g = 'Drama';
-        break;
-      case 10751:
-        g = 'Family';
-        break;
-      case 14:
-        g = 'Fantasy';
-        break;
-      case 36:
-        g = 'History';
-        break;
-      case 27:
-        g = 'Horror';
-        break;
-      case 10402:
-        g = 'Music';
-        break;
-      case 9648:
-        g = 'Mystery';
-        break;
-      case 10749:
-        g = 'Romance';
-        break;
-      case 878:
-        g = 'Science Fiction';
-        break;
-      case 10770:
-        g = 'TV Movie';
-        break;
-      case 53:
-        g = 'Thriller';
-        break;
-
-      case 10752:
-        g = 'War';
-        break;
-
-      case 37:
-        g = 'Western';
-        break;
-
-      default:
-        g = 'non ganre';
-        break;
-    }
-    return g;
-  };
+  const { url } = useRouteMatch();
 
   useEffect(() => {
     getOneMovie(movieId)
       .then((response) => {
-        console.log(response);
-        console.log(response.data);
         setMovie(response.data);
         setStatus(false);
       })
       .catch((error) => console.log(error));
   }, [movieId]);
-  // console.log(movie);
   const {
     backdrop_path,
     alt,
@@ -102,6 +33,7 @@ export const MovieDetailsPage = () => {
   } = movie;
 
   return (
+    //*___________________SPINNER*//
     <>
       {status ? (
         <Loader
@@ -112,6 +44,7 @@ export const MovieDetailsPage = () => {
           timeout={0}
         />
       ) : (
+        //*___________________MAIN INFO*//
         <>
           <div className="Info">
             <img
@@ -125,17 +58,47 @@ export const MovieDetailsPage = () => {
               <p>{overview}</p>
               <h4>Genres</h4>
               <ul>
-                {genres.map((genre) => (
-                  <li>{genre.name}</li>
+                {genres.map((genre, id) => (
+                  <li key={id}>{genre.name}</li>
                 ))}
               </ul>
             </div>
           </div>
           <div className="add">
             <p>Additional information</p>
-            <Link></Link>
-            <Link></Link>
+            <ul>
+              <li>
+                <NavLink
+                  to={{
+                    pathname: `${url}/reviews`,
+                    // state: { from: '' },
+                  }}
+                >
+                  Reviews
+                </NavLink>
+              </li>
+
+              <li>
+                {' '}
+                <NavLink
+                  to={{
+                    pathname: `${url}/cast`,
+                    // state: { from: '' },
+                  }}
+                >
+                  {' '}
+                  Cast
+                </NavLink>
+              </li>
+            </ul>
           </div>
+
+          <Route path="/movies/:movieId/cast">
+            <Cast />
+          </Route>
+          <Route path="/movies/:movieId/reviews">
+            <Reviews />
+          </Route>
         </>
       )}
     </>

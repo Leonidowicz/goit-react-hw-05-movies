@@ -27,12 +27,12 @@ export default function App() {
           <MovieDetailsPage />
         </Route>
 
-        {/* <Route to="/movies/:movieId/cast">
+        {/* <Route to="/movies/cast/:movieId">
           <Cast />
         </Route>
-        <Route to="/movies/:movieId/reviews">
-          <Reviews />
-        </Route> */}
+        <Route to="/movies/reviews/:movieId">
+          <Reviews /> </Route>*/}
+
         <Route>
           <NotFound />
         </Route>

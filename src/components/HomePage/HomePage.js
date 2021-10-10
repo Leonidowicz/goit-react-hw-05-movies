@@ -8,8 +8,6 @@ export const HomePage = () => {
   useEffect(() => {
     getTrend()
       .then((response) => {
-        console.log(response);
-        console.log(response.data.results);
         setMovies(response.data.results);
       })
       .catch((error) => console.log(error));
