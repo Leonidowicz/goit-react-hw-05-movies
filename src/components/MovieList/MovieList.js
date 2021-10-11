@@ -1,7 +1,8 @@
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 
 export const MovieList = ({ movies, titel }) => {
   const { url } = useRouteMatch();
+  const location = useLocation();
   return (
     <>
       <h1>{titel}</h1>
@@ -11,7 +12,12 @@ export const MovieList = ({ movies, titel }) => {
             <Link
               to={{
                 pathname: `/movies/${movie.id}`,
-                // state: { from: '' },
+                state: {
+                  from: {
+                    location,
+                    label: 'Return to previous page',
+                  },
+                },
               }}
             >
               {movie.title ||

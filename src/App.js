@@ -5,9 +5,7 @@ import './App.css';
 import { AppBar } from './components/AppBar/AppBar';
 import { MoviesPage } from './components/MoviesPage/MoviesPage';
 import { HomePage } from './components/HomePage/HomePage';
-import { MovieDetailsPage } from './components/MovieDetailsPage/MovieDetailsPage';
-// import { Cast } from './components/Cast/Cast';
-// import { Reviews } from './components/Reviews/Reviews';
+import { MovieDetailsPage } from './components/MovieDetailsPage/MovieDetailsPage.jsx';
 import { NotFound } from './components/NotFound/NotFound';
 
 export default function App() {
@@ -26,13 +24,6 @@ export default function App() {
         <Route path="/movies/:movieId">
           <MovieDetailsPage />
         </Route>
-
-        {/* <Route to="/movies/cast/:movieId">
-          <Cast />
-        </Route>
-        <Route to="/movies/reviews/:movieId">
-          <Reviews /> </Route>*/}
-
         <Route>
           <NotFound />
         </Route>

@@ -1,4 +1,10 @@
-import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
+import {
+  useParams,
+  NavLink,
+  useRouteMatch,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getOneMovie } from '../../services/AxiosMovies';
 import Loader from 'react-loader-spinner';
@@ -12,6 +18,10 @@ export const MovieDetailsPage = () => {
 
   const { movieId } = useParams();
   const { url } = useRouteMatch();
+  const location = useLocation();
+  // console.log(location);
+  const history = useHistory();
+  console.log(history);
 
   useEffect(() => {
     getOneMovie(movieId)
@@ -32,6 +42,9 @@ export const MovieDetailsPage = () => {
     name,
   } = movie;
 
+  const onGoBack = () => {
+    history.push(location?.state?.from.location ?? '/');
+  };
   return (
     //*___________________SPINNER*//
     <>
@@ -46,6 +59,9 @@ export const MovieDetailsPage = () => {
       ) : (
         //*___________________MAIN INFO*//
         <>
+          <button type="button" onClick={onGoBack}>
+            {location?.state?.from?.label ?? 'Return'}
+          </button>
           <div className="Info">
             <img
               src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
@@ -71,7 +87,12 @@ export const MovieDetailsPage = () => {
                 <NavLink
                   to={{
                     pathname: `${url}/reviews`,
-                    // state: { from: '' },
+                    state: {
+                      from: {
+                        pathname: '/',
+                        label: 'Return to previous page',
+                      },
+                    },
                   }}
                 >
                   Reviews
@@ -83,7 +104,12 @@ export const MovieDetailsPage = () => {
                 <NavLink
                   to={{
                     pathname: `${url}/cast`,
-                    // state: { from: '' },
+                    state: {
+                      from: {
+                        pathname: '/',
+                        label: 'Return to previous page',
+                      },
+                    },
                   }}
                 >
                   {' '}
