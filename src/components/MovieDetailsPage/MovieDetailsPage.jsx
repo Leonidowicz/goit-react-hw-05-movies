@@ -11,6 +11,7 @@ import Loader from 'react-loader-spinner';
 import { Route } from 'react-router';
 import { Cast } from '../Cast/Cast.jsx';
 import { Reviews } from '../Reviews/Reviews.jsx';
+// import slugify from 'slugify';
 
 export const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
@@ -21,7 +22,9 @@ export const MovieDetailsPage = () => {
   const location = useLocation();
   // console.log(location);
   const history = useHistory();
-  console.log(history);
+  // console.log(history);
+  // const slug = slugify();
+  // slug('KUkghljhUHPUIk  ;oij[gperj[go]rpgh]dfg]e');
 
   useEffect(() => {
     getOneMovie(movieId)
@@ -107,6 +110,7 @@ export const MovieDetailsPage = () => {
                     state: {
                       from: {
                         pathname: '/',
+                        hash: '#cast',
                         label: 'Return to previous page',
                       },
                     },
