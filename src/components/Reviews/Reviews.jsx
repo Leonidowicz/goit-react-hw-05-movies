@@ -2,6 +2,8 @@ import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { getReview } from '../../services/AxiosMovies';
 import Loader from 'react-loader-spinner';
+import ScrollToTop from 'react-scroll-to-top';
+
 export const Reviews = () => {
   const { movieId } = useParams();
   const [review, setReview] = useState([]);
@@ -17,7 +19,8 @@ export const Reviews = () => {
 
   return (
     <>
-      {' '}
+      <ScrollToTop smooth={true} />
+
       {!status && (
         <Loader
           type="Puff"

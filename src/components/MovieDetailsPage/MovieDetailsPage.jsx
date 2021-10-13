@@ -48,6 +48,7 @@ export const MovieDetailsPage = () => {
   const onGoBack = () => {
     history.push(location?.state?.from.location ?? '/');
   };
+
   return (
     //*___________________SPINNER*//
     <>
@@ -92,7 +93,8 @@ export const MovieDetailsPage = () => {
                     pathname: `${url}/reviews`,
                     state: {
                       from: {
-                        pathname: '/',
+                        // pathname: '/',
+                        location,
                         label: 'Return to previous page',
                       },
                     },
@@ -109,7 +111,8 @@ export const MovieDetailsPage = () => {
                     pathname: `${url}/cast`,
                     state: {
                       from: {
-                        pathname: '/',
+                        // pathname: '/',
+                        location,
                         hash: '#cast',
                         label: 'Return to previous page',
                       },

@@ -1,19 +1,32 @@
 import { getByQuery } from '../../services/AxiosMovies';
 import { useState, useEffect } from 'react';
 import { MovieList } from '../MovieList/MovieList';
+import { useHistory } from 'react-router';
+import { useLocation } from 'react-router';
 
 export const MoviesPage = () => {
   const [valueForm, setValueForm] = useState('batman');
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
+  const location = useLocation();
+  const history = useHistory();
+  const getQuery = new URLSearchParams(location.search).get('query');
 
   useEffect(() => {
+    if (getQuery?.length > 0) {
+      setQuery(getQuery);
+    }
+    if (query === '') {
+      return;
+    }
+
     getByQuery(query)
       .then((response) => {
         setMovies(response.data.results);
       })
       .catch((error) => console.log(error));
-  }, [query]);
+  }, [getQuery, query]);
+
   const onChange = (event) => {
     event.preventDefault();
     setValueForm(event.target.value);
@@ -21,6 +34,7 @@ export const MoviesPage = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     setQuery(valueForm);
+    history.push({ ...location, search: `query=${valueForm}` });
   };
   return (
     <>
@@ -30,7 +44,9 @@ export const MoviesPage = () => {
         </label>
         <input type="submit" value="Search Movie" />
       </form>
-      <MovieList movies={movies} titel={'Films found'} />
+      {movies.length !== 0 && (
+        <MovieList movies={movies} titel={'Films found'} />
+      )}
     </>
   );
 };

@@ -1,8 +1,8 @@
-import { Link, useRouteMatch, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const MovieList = ({ movies, titel }) => {
-  const { url } = useRouteMatch();
   const location = useLocation();
+
   return (
     <>
       <h1>{titel}</h1>
@@ -15,6 +15,7 @@ export const MovieList = ({ movies, titel }) => {
                 state: {
                   from: {
                     location,
+                    // search: '?sort=name',
                     label: 'Return to previous page',
                   },
                 },
