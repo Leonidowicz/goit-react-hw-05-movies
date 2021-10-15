@@ -4,7 +4,7 @@ import { getReview } from '../../services/AxiosMovies';
 import Loader from 'react-loader-spinner';
 import ScrollToTop from 'react-scroll-to-top';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [review, setReview] = useState([]);
   const [status, setStatus] = useState(0);
@@ -45,3 +45,4 @@ export const Reviews = () => {
     </>
   );
 };
+export default Reviews;

@@ -1,10 +1,13 @@
 import { getByQuery } from '../../services/AxiosMovies';
-import { useState, useEffect } from 'react';
-import { MovieList } from '../MovieList/MovieList';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router';
 
-export const MoviesPage = () => {
+// import { MovieList } from '../MovieList/MovieList';
+
+const MovieList = lazy(() => import('../MovieList/MovieList.js'));
+
+const MoviesPage = () => {
   const [valueForm, setValueForm] = useState('batman');
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -45,8 +48,11 @@ export const MoviesPage = () => {
         <input type="submit" value="Search Movie" />
       </form>
       {movies.length !== 0 && (
-        <MovieList movies={movies} titel={'Films found'} />
+        <Suspense fallback={<h1>LOADING</h1>}>
+          <MovieList movies={movies} titel={'Films found'} />
+        </Suspense>
       )}
     </>
   );
 };
+export default MoviesPage;

@@ -5,15 +5,19 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { getOneMovie } from '../../services/AxiosMovies';
 import Loader from 'react-loader-spinner';
 import { Route } from 'react-router';
-import { Cast } from '../Cast/Cast.jsx';
-import { Reviews } from '../Reviews/Reviews.jsx';
+
+// import { Cast } from ;
+// import { Reviews } from '../Reviews/Reviews.jsx';
 // import slugify from 'slugify';
 
-export const MovieDetailsPage = () => {
+const Cast = lazy(() => import('../Cast/Cast.jsx'));
+const Reviews = lazy(() => import('../Reviews/Reviews.jsx'));
+
+const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
   const [status, setStatus] = useState(true);
 
@@ -125,16 +129,18 @@ export const MovieDetailsPage = () => {
               </li>
             </ul>
           </div>
+          <Suspense fallback={<h1>LOADING</h1>}>
+            <Route path="/movies/:movieId/cast">
+              <Cast />
+            </Route>
 
-          <Route path="/movies/:movieId/cast">
-            <Cast />
-          </Route>
-
-          <Route path="/movies/:movieId/reviews">
-            <Reviews />
-          </Route>
+            <Route path="/movies/:movieId/reviews">
+              <Reviews />
+            </Route>
+          </Suspense>
         </>
       )}
     </>
   );
 };
+export default MovieDetailsPage;

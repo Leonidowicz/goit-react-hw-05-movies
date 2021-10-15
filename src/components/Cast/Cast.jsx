@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Loader from 'react-loader-spinner';
 import ScrollToTop from 'react-scroll-to-top';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [status, setStatus] = useState(0);
@@ -51,3 +51,4 @@ export const Cast = () => {
     </>
   );
 };
+export default Cast;

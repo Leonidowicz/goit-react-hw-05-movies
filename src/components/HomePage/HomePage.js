@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { getTrend } from '../../services/AxiosMovies';
-import { MovieList } from '../MovieList/MovieList';
 
-export const HomePage = () => {
+// import { MovieList } from '../MovieList/MovieList';
+
+const MovieList = lazy(() => import('../MovieList/MovieList.js'));
+
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -20,3 +23,4 @@ export const HomePage = () => {
     </>
   );
 };
+export default HomePage;
