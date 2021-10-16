@@ -50,7 +50,7 @@ const Cast = () => {
           ))}
         </ul>
       ) : (
-        <p>This movie not have reviews</p>
+        <p>This movie not have cast</p>
       )}
     </>
   );

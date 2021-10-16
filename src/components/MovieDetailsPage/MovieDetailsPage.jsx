@@ -1,4 +1,5 @@
 import './MovieDetailsPage.scss';
+import backImage from './0001.jpg';
 import {
   useParams,
   NavLink,
@@ -70,7 +71,11 @@ const MovieDetailsPage = () => {
           </button>
           <div className="Info">
             <img
-              src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
+              src={
+                backdrop_path
+                  ? `https://image.tmdb.org/t/p/w500${backdrop_path}`
+                  : backImage
+              }
               alt={alt}
             />
             <div className="about">
