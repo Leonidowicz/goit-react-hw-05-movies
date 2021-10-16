@@ -1,3 +1,4 @@
+import './MovieList.scss';
 import { Link, useLocation } from 'react-router-dom';
 
 const MovieList = ({ movies, titel }) => {
@@ -5,7 +6,7 @@ const MovieList = ({ movies, titel }) => {
 
   return (
     <>
-      <h1>{titel}</h1>
+      {titel && <h1>{titel}</h1>}
       <ul>
         {movies.map((movie) => (
           <li key={movie.id}>
@@ -15,7 +16,6 @@ const MovieList = ({ movies, titel }) => {
                 state: {
                   from: {
                     location,
-                    // search: '?sort=name',
                     label: 'Return to previous page',
                   },
                 },

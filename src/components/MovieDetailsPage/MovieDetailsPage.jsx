@@ -1,3 +1,4 @@
+import './MovieDetailsPage.scss';
 import {
   useParams,
   NavLink,
@@ -10,12 +11,12 @@ import { getOneMovie } from '../../services/AxiosMovies';
 import Loader from 'react-loader-spinner';
 import { Route } from 'react-router';
 
-// import { Cast } from ;
-// import { Reviews } from '../Reviews/Reviews.jsx';
-// import slugify from 'slugify';
-
-const Cast = lazy(() => import('../Cast/Cast.jsx'));
-const Reviews = lazy(() => import('../Reviews/Reviews.jsx'));
+const Cast = lazy(() =>
+  import('../Cast/Cast.jsx' /* webpackChunkName: "cast" */)
+);
+const Reviews = lazy(() =>
+  import('../Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */)
+);
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
@@ -24,11 +25,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const { url } = useRouteMatch();
   const location = useLocation();
-  // console.log(location);
   const history = useHistory();
-  // console.log(history);
-  // const slug = slugify();
-  // slug('KUkghljhUHPUIk  ;oij[gperj[go]rpgh]dfg]e');
 
   useEffect(() => {
     getOneMovie(movieId)
@@ -38,6 +35,7 @@ const MovieDetailsPage = () => {
       })
       .catch((error) => console.log(error));
   }, [movieId]);
+
   const {
     backdrop_path,
     alt,
@@ -55,7 +53,7 @@ const MovieDetailsPage = () => {
 
   return (
     //*___________________SPINNER*//
-    <>
+    <div className="container">
       {status ? (
         <Loader
           type="Puff"
@@ -81,7 +79,7 @@ const MovieDetailsPage = () => {
               <h3>Overview</h3>
               <p>{overview}</p>
               <h4>Genres</h4>
-              <ul>
+              <ul className="genres">
                 {genres.map((genre, id) => (
                   <li key={id}>{genre.name}</li>
                 ))}
@@ -94,10 +92,10 @@ const MovieDetailsPage = () => {
               <li>
                 <NavLink
                   to={{
+                    //*___________________Reviews*//
                     pathname: `${url}/reviews`,
                     state: {
                       from: {
-                        // pathname: '/',
                         location,
                         label: 'Return to previous page',
                       },
@@ -112,6 +110,7 @@ const MovieDetailsPage = () => {
                 {' '}
                 <NavLink
                   to={{
+                    //*___________________Cast*//
                     pathname: `${url}/cast`,
                     state: {
                       from: {
@@ -129,7 +128,7 @@ const MovieDetailsPage = () => {
               </li>
             </ul>
           </div>
-          <Suspense fallback={<h1>LOADING</h1>}>
+          <Suspense allback={<h1>LOADING</h1>}>
             <Route path="/movies/:movieId/cast">
               <Cast />
             </Route>
@@ -140,7 +139,7 @@ const MovieDetailsPage = () => {
           </Suspense>
         </>
       )}
-    </>
+    </div>
   );
 };
 export default MovieDetailsPage;

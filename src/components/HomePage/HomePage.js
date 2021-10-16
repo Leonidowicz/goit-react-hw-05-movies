@@ -1,9 +1,9 @@
 import { useState, useEffect, lazy } from 'react';
 import { getTrend } from '../../services/AxiosMovies';
 
-// import { MovieList } from '../MovieList/MovieList';
-
-const MovieList = lazy(() => import('../MovieList/MovieList.js'));
+const MovieList = lazy(() =>
+  import('../MovieList/MovieList.js' /* webpackChunkName: "movie-list" */)
+);
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);

@@ -1,3 +1,5 @@
+import './Cast.scss';
+import avatar from './000.jpg';
 import { getCast } from '../../services/AxiosMovies';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
@@ -33,13 +35,15 @@ const Cast = () => {
         <ul id="cast">
           {cast.map(({ profile_path, cast_id, name, character }) => (
             <li key={cast_id}>
-              {profile_path && (
-                <img
-                  height="200"
-                  src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-                  alt={name}
-                />
-              )}
+              <img
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                    : avatar
+                }
+                alt={name}
+              />
+
               <p>{name}.</p>
               {character && <p>Character: {character}</p>}
             </li>

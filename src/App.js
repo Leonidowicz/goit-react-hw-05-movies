@@ -1,23 +1,28 @@
 import { Switch, Route } from 'react-router';
 import { lazy, Suspense } from 'react';
-import './App.css';
+import './App.scss';
 import { AppBar } from './components/AppBar/AppBar';
 
-// import { MoviesPage } from './components/MoviesPage/MoviesPage';
-// import { HomePage } from './components/HomePage/HomePage';
-// import { MovieDetailsPage } from './components/MovieDetailsPage/MovieDetailsPage.jsx';
-// import { NotFound } from './components/NotFound/NotFound';
-
-const MoviesPage = lazy(() => import('./components/MoviesPage/MoviesPage'));
-const HomePage = lazy(() => import('./components/HomePage/HomePage'));
-const MovieDetailsPage = lazy(() =>
-  import('./components/MovieDetailsPage/MovieDetailsPage')
+const MoviesPage = lazy(() =>
+  import(
+    './components/MoviesPage/MoviesPage' /* webpackChunkName: "movies-page" */
+  )
 );
-const NotFound = lazy(() => import('./components/NotFound/NotFound'));
+const HomePage = lazy(() =>
+  import('./components/HomePage/HomePage' /* webpackChunkName: "home-page" */)
+);
+const MovieDetailsPage = lazy(() =>
+  import(
+    './components/MovieDetailsPage/MovieDetailsPage' /* webpackChunkName: "movie-details-page" */
+  )
+);
+const NotFound = lazy(() =>
+  import('./components/NotFound/NotFound' /* webpackChunkName: "not-found" */)
+);
 
 export default function App() {
   return (
-    <div className="App">
+    <div className="app">
       <AppBar />
       <Suspense fallback={<h1>LOADING</h1>}>
         <Switch>

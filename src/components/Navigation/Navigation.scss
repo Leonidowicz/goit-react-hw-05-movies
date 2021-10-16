@@ -1,17 +1,40 @@
 .nav {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  // padding-top: 20px;
   margin-bottom: 20px;
   font-size: 20px;
   text-decoration: none;
   color: rgb(42, 165, 118);
-  width: 200px;
+  width: inherit;
+  height: 80px;
+  background-color: rgb(153, 155, 155);
+  border-radius: 10px;
 
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid rgb(104, 104, 104);
+    border-radius: 10px;
+    background-color: rgb(135, 136, 136);
+    display: block;
+    height: 30px;
+
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    // &:visited {
+    //   color: navajowhite;
+    // }
+  }
   .activ {
     font-size: 22px;
     font-style: oblique;
     text-decoration: solid;
-    color: brown;
+    color: rgb(255, 255, 255);
   }
 }

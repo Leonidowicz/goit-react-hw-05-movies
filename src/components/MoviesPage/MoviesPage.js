@@ -3,9 +3,9 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router';
 
-// import { MovieList } from '../MovieList/MovieList';
-
-const MovieList = lazy(() => import('../MovieList/MovieList.js'));
+const MovieList = lazy(() =>
+  import('../MovieList/MovieList.js' /* webpackChunkName: "movie-list" */)
+);
 
 const MoviesPage = () => {
   const [valueForm, setValueForm] = useState('batman');
